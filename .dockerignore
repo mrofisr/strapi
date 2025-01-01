@@ -1,0 +1,38 @@
+# .dockerignore
+.strapi
+# Ignore node_modules for backend
+node_modules
+
+# Ignore build outputs
+build
+.cache
+
+# Ignore environment variables
+.env
+
+# Ignore logs
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE files
+.vscode
+.idea
+*.swp
+*.swo
+
+# Ignore Docker files
+docker-compose.*.yaml
+.env*
+docker/
+
+# Ignore any other temporary files
+*.tmp
+*.temp
+*.bak
+*.backup

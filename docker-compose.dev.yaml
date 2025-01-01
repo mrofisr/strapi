@@ -1,0 +1,56 @@
+name: strapi_dev
+services:
+  strapi:
+    image: strapi:latest
+    build:
+      context: .
+      dockerfile: Dockerfile 
+    container_name: strapi
+    restart: always
+    pull_policy: always
+    environment:
+      - HOST=0.0.0.0
+      - PORT=1337
+      - APP_KEYS=8SOsn8F8Uxf1CQunkqL42g==,DoYuDkg4e88ikZu7FeNjdw==,7h7b+bkj2PXWPJD4Iad5hQ==,WI2RyKV991kK1E8jr92vKA==
+      - API_TOKEN_SALT=T1aQxjA9CbWypQDHM4X5Rw==
+      - ADMIN_JWT_SECRET=EA2M7oICPNfrJYR6fbdqDg==
+      - TRANSFER_TOKEN_SALT=H7kH0Fs27Vvu6Ndev4GJ1g==
+      - DATABASE_CLIENT=postgres
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=strapi_dev
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_SSL=false
+      - DATABASE_FILENAME=
+      - JWT_SECRET=5Mb4DO3M/hiSbMThPnIziA==
+    networks:
+      - strapi_dev
+
+  postgres:
+    image: postgres:17.2
+    container_name: postgres
+    restart: always
+    volumes:
+      - pgdata_dev:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: strapi_dev
+      # Create additional user for strapi
+      POSTGRES_MULTIPLE_DATABASES: strapi_dev
+      POSTGRES_ADDITIONAL_USER: strapi
+      POSTGRES_ADDITIONAL_PASSWORD: 123456789
+    ports:
+      - '5432:5432'
+    networks:
+      - strapi_dev
+
+volumes:
+  pgdata_dev:
+    name: pgdata_dev
+    driver: local
+networks:
+  strapi_dev:
+    name: strapi_dev
+    driver: bridge
