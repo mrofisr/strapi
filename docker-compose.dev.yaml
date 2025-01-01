@@ -1,13 +1,13 @@
 name: strapi_dev
 services:
   strapi:
-    image: strapi:latest
     build:
       context: .
       dockerfile: Dockerfile 
     container_name: strapi
     restart: always
-    pull_policy: always
+    expose:
+      - 1337:1337
     environment:
       - HOST=0.0.0.0
       - PORT=1337

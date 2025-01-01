@@ -33,5 +33,8 @@ ENV PATH=/opt/node_modules/.bin:$PATH
 
 RUN chown -R node:node /opt/app
 USER node
+
+HEALTHCHECK --interval=1m30s --timeout=30s --start-period=30s --retries=5 CMD curl --fail http://localhost:1337/_health || exit 1
+
 EXPOSE 1337
 CMD ["bun", "start"]
