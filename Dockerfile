@@ -1,5 +1,7 @@
 # Creating multi-stage build for production
 FROM node:21-alpine as build
+LABEL org.opencontainers.image.source https://github.com/mrofisr/strapi
+
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev git > /dev/null 2>&1
 ENV NODE_ENV=production
 
@@ -16,6 +18,8 @@ RUN bun run build
 
 # Creating final production images
 FROM node:21-alpine
+LABEL org.opencontainers.image.source https://github.com/mrofisr/strapi
+
 RUN apk add --no-cache vips-dev tzdata
 RUN ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 RUN npm install -g bun
