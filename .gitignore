@@ -129,3 +129,4 @@ build
 .strapi-updater.json
 .strapi-cloud.json
 docker-compose.prod.yaml
+Caddyfile
