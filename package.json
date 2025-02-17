@@ -11,6 +11,9 @@
     "start": "strapi start",
     "strapi": "strapi"
   },
+  "resolutions": {
+    "@types/koa": "2.13.4"
+  },
   "dependencies": {
     "@strapi/plugin-cloud": "5.6.0",
     "@strapi/plugin-users-permissions": "5.6.0",
