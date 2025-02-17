@@ -1,4 +1,3 @@
-import type { Strapi } from '@strapi/strapi/lib/types';
 import { Context, Next } from 'koa';
 
 interface StrapiFile {
@@ -21,7 +20,7 @@ interface FolderAccessConfig {
   allowedFolders?: string[];
 }
 
-export default (config: FolderAccessConfig, { strapi }: { strapi: Strapi }) => {
+export default (config: FolderAccessConfig, { strapi }: { strapi: any }) => {
   return async (ctx: Context, next: Next): Promise<void> => {
     if (ctx.path.startsWith('/api/upload/files')) {
       try {
