@@ -9,4 +9,7 @@ export default [
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
+  {
+    resolve: 'middlewares/folder-access.ts'
+  }
 ];
