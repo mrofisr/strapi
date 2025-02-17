@@ -1,5 +1,4 @@
-// src/middlewares/folder-access.ts
-import { Strapi } from '@strapi/strapi';
+import type { Strapi } from '@strapi/strapi/lib/types';
 import { Context, Next } from 'koa';
 
 interface StrapiFile {
