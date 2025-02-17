@@ -6,7 +6,7 @@ RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev l
 ENV NODE_ENV=production
 
 WORKDIR /opt/
-COPY bun.lockb package.json ./
+COPY package.json ./
 RUN npm install -g bun
 ENV PATH="/root/.bun/bin:$PATH"
 RUN bun install --production
