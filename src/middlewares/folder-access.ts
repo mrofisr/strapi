@@ -31,16 +31,16 @@ export default (config: FolderAccessConfig, { strapi }: { strapi: any }) => {
           return await next();
         }
 
-        // Query only files from specific folder
+        // Query only files from a specific folder
         const files: StrapiFile[] = await strapi.query('plugin::upload.file').findMany({
           where: {
             folder: {
               path: {
-                startsWith: `/${folder}`
-              }
-            }
+                startsWith: `/${folder}`,
+              },
+            },
           },
-          populate: true
+          populate: true,
         });
 
         ctx.body = files;

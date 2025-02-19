@@ -10,6 +10,6 @@ export default [
   'strapi::favicon',
   'strapi::public',
   {
-    resolve: 'middlewares/folder-access.ts'
+    resolve: './src/middlewares/folder-access.ts'
   }
 ];
