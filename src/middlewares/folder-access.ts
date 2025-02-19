@@ -16,7 +16,7 @@ interface StrapiFile {
 }
 
 interface FolderAccessConfig {
-  // Add any configuration options here
+  // Only allow access to these folders (if provided)
   allowedFolders?: string[];
 }
 
@@ -31,12 +31,17 @@ export default (config: FolderAccessConfig, { strapi }: { strapi: any }) => {
           return await next();
         }
 
-        // Query only files from a specific folder
+        // If allowedFolders is specified in the config, enforce restrictions.
+        if (config.allowedFolders && !config.allowedFolders.includes(folder)) {
+          ctx.throw(403, `Access to folder "${folder}" is not allowed.`);
+        }
+
+        // Query only files from a specific folder using the "$startsWith" operator
         const files: StrapiFile[] = await strapi.query('plugin::upload.file').findMany({
           where: {
             folder: {
               path: {
-                startsWith: `/${folder}`,
+                $startsWith: `/${folder}`,
               },
             },
           },
